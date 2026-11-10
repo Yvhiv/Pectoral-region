@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pectoral Region Muscles – Interactive Quiz</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Figtree:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#e9eff4;--card:#fff;--ink:#12202f;--mute:#586a7c;--red:#b23a48;--redsoft:#f6dfe2;--teal:#1f7a7d;--tealsoft:#d9eeee;--line:#cfd9e2;--bad:#b23a48;--good:#1f7a5a;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1822;--card:#16273a;--ink:#e8eef4;--mute:#9db0c2;--red:#e0707d;--redsoft:#3a2330;--teal:#55b9bc;--tealsoft:#173a44;--line:#2a4058;--good:#4fc99a}}
+:root[data-theme="dark"]{--bg:#0e1822;--card:#16273a;--ink:#e8eef4;--mute:#9db0c2;--red:#e0707d;--redsoft:#3a2330;--teal:#55b9bc;--tealsoft:#173a44;--line:#2a4058;--good:#4fc99a}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 Figtree,system-ui,sans-serif}
+.wrap{max-width:760px;margin:0 auto;padding:20px 16px 48px}
+h1,h2,h3{font-family:'Bricolage Grotesque',system-ui,sans-serif;line-height:1.1;margin:0}
+header{padding:28px 0 8px}
+h1{font-size:clamp(34px,8vw,56px);font-weight:800;letter-spacing:-.02em}
+h1 span{color:var(--red)}
+.sub{color:var(--mute);max-width:46ch;margin:10px 0 0}
+nav{display:flex;gap:6px;margin:22px 0 16px;background:var(--card);padding:5px;border-radius:14px;border:1px solid var(--line)}
+nav button{flex:1;border:0;background:none;color:var(--mute);font:600 15px Figtree;padding:11px;border-radius:10px;cursor:pointer}
+nav button[aria-selected=true]{background:var(--ink);color:var(--bg)}
+button:focus-visible{outline:3px solid var(--teal);outline-offset:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px}
+svg{width:100%;height:auto;display:block}
+.m{cursor:pointer;transition:fill .2s,opacity .2s}
+.m:focus-visible{outline:none;stroke:var(--teal);stroke-width:3}
+.bone{fill:none;stroke:var(--mute);stroke-linecap:round}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.chip{border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:99px;font:600 14px Figtree;cursor:pointer}
+.chip[aria-pressed=true]{background:var(--red);border-color:var(--red);color:#fff}
+.info h2{font-size:26px;margin-bottom:4px}
+.info p.t{color:var(--mute);margin:0 0 12px}
+dl{margin:0;display:grid;grid-template-columns:96px 1fr;gap:8px 12px}
+dt{font-weight:600;color:var(--teal)}dd{margin:0}
+.case{display:inline-block;background:var(--teal);color:var(--bg);font:600 12px Figtree;padding:2px 9px;border-radius:99px;vertical-align:middle;margin-right:4px}
+.hint{color:var(--mute);font-size:14px;margin:8px 2px 0}
+.bar{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;background:var(--red);width:0;transition:width .3s}
+.meta{display:flex;justify-content:space-between;color:var(--mute);font-size:14px;margin-bottom:6px}
+.q{font:700 clamp(20px,4.6vw,25px)/1.25 'Bricolage Grotesque',sans-serif;margin:6px 0 16px}
+.opts{display:grid;gap:10px}
+.opt{display:flex;gap:12px;align-items:flex-start;text-align:left;width:100%;border:1.5px solid var(--line);background:var(--card);color:var(--ink);padding:13px 14px;border-radius:14px;font:500 16px/1.4 Figtree;cursor:pointer}
+.opt b{flex:none;width:26px;height:26px;border-radius:8px;background:var(--bg);display:grid;place-items:center;font-size:13px}
+.opt:not(:disabled):hover{border-color:var(--teal)}
+.opt.good{border-color:var(--good);background:color-mix(in srgb,var(--good) 14%,var(--card))}
+.opt.bad{border-color:var(--bad);background:var(--redsoft)}
+.opt:disabled{cursor:default}
+.exp{margin-top:14px;padding:13px 14px;border-radius:12px;background:var(--tealsoft);font-size:15px}
+.next{margin-top:16px;width:100%;border:0;background:var(--red);color:#fff;font:700 16px Figtree;padding:14px;border-radius:14px;cursor:pointer}
+.ghost{background:var(--card);color:var(--ink);border:1.5px solid var(--line);margin-top:10px}
+.score{font:800 72px/1 'Bricolage Grotesque';color:var(--red)}
+.rev{margin:16px 0 0;padding:0;list-style:none;display:grid;gap:10px}
+.rev li{padding:12px;border-radius:12px;background:var(--bg);font-size:15px}
+.rev small{color:var(--mute)}
+[hidden]{display:none!important}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><script defer src="/_vercel/insights/script.js"></script></head><body><div class="wrap">
+<header><h1>Pectoral <span>Region</span></h1>
+<p class="sub">Explore the muscles, then test yourself with two quizzes built from the Musculoskeletal module book.</p></header>
+<nav role="tablist"><button role="tab" id="t1" aria-selected="true">Explore</button><button role="tab" id="t2" aria-selected="false">Quiz</button></nav>
+
+<section id="explore">
+<div class="card"><svg viewBox="0 0 360 250" role="img" aria-label="Anterior chest diagram of pectoral region muscles">
+<rect x="62" y="48" width="16" height="150" rx="8" class="bone" stroke-width="3"/>
+<path class="bone" stroke-width="3" d="M70 52 Q150 36 250 46"/>
+<g class="bone" stroke-width="2" opacity=".5"><path d="M78 80 Q150 90 215 150"/><path d="M78 100 Q150 112 220 170"/><path d="M78 120 Q150 132 222 190"/><path d="M78 140 Q150 152 215 205"/></g>
+<rect x="268" y="66" width="14" height="150" rx="7" class="bone" stroke-width="3"/>
+<circle cx="236" cy="58" r="7" fill="var(--mute)"/>
+<g id="serratus"><path class="m" data-k="ser" tabindex="0" role="button" aria-label="Serratus anterior" d="M150 150 L205 135 L214 148 L160 168 Z M158 172 L212 154 L221 168 L168 190 Z M166 194 L218 174 L226 190 L176 214 Z" fill="var(--teal)" opacity=".55"/></g>
+<path class="m" data-k="sub" tabindex="0" role="button" aria-label="Subclavius" d="M82 58 Q150 46 210 52 L210 62 Q150 58 84 70 Z" fill="var(--teal)"/>
+<path class="m" data-k="maj" tabindex="0" role="button" aria-label="Pectoralis major" d="M80 74 Q170 62 262 92 L266 112 Q180 110 84 196 Z" fill="var(--red)" opacity=".85"/>
+<path class="m" data-k="min" tabindex="0" role="button" aria-label="Pectoralis minor" d="M96 118 L236 64 L226 76 L100 150 Z" fill="var(--ink)" opacity=".8"/>
+<text x="20" y="232" font-size="12" fill="var(--mute)" font-family="Figtree">Clavicle, sternum and ribs shown in outline; humerus on the right.</text>
+</svg></div>
+<div class="chips" role="group" aria-label="Choose a muscle">
+<button class="chip" data-k="maj">Pectoralis major</button><button class="chip" data-k="min">Pectoralis minor</button><button class="chip" data-k="sub">Subclavius</button><button class="chip" data-k="ser">Serratus anterior</button><button class="chip" data-k="fas">Clavipectoral fascia</button></div>
+<div class="card info" id="info" aria-live="polite"></div>
+<p class="hint">Tap a muscle on the diagram or use the buttons.</p>
+</section>
+
+<section id="quiz" hidden>
+<div class="card" id="qbox"></div>
+</section>
+</div>
+<script>
+const M={
+maj:{n:'Pectoralis major',t:'Largest muscle of the region, fan shaped.',o:'Clavicular head: medial half of the anterior clavicle. Sternocostal head: sternum and upper 6 costal cartilages.',i:'Lateral lip of the bicipital groove by a bilaminar tendon.',ne:'Lateral and medial pectoral nerves.',a:'Flexion (clavicular head), adduction and medial rotation of the arm. With latissimus dorsi it draws the trunk toward the limb (climbing, swimming).'},
+min:{n:'Pectoralis minor',t:'Triangular, lies deep to pectoralis major.',o:'3rd, 4th and 5th ribs near their costal cartilages.',i:'Medial border and upper surface of the coracoid process.',ne:'Medial pectoral nerve.',a:'Protraction and depression of the scapula.'},
+sub:{n:'Subclavius',t:'Small rounded muscle below the clavicle, in the plane of pectoralis minor.',o:'1st rib at its costochondral junction.',i:'Subclavius groove on the lower surface of the clavicle.',ne:'Nerve to subclavius (from the upper trunk, C5, 6).',a:'Stabilizes the medial end of the clavicle during shoulder movement.'},
+ser:{n:'Serratus anterior',t:'Flat muscle between the scapula and the posterior thoracic wall.',o:'8 fleshy digitations from the upper 8 ribs.',i:'1st digitation: superior angle; next 2: medial border; lower 5: inferior angle of the scapula.',ne:'Long thoracic nerve (C5, 6, 7).',a:'Main protractor of the scapula; with trapezius it rotates the scapula to abduct the arm 90–180°; fixes the scapula to the chest wall.'},
+fas:{n:'Clavipectoral fascia',t:'Double-layered fibrous sheet deep to pectoralis major.',o:'Encloses subclavius above (attached to the clavicle) and pectoralis minor below.',i:'Below, the layers fuse and attach to the axillary fascia as the suspensory ligament of the axilla.',ne:'Pierced by: thoraco-acromial artery, cephalic vein, lateral pectoral nerve, lymph vessels.',a:'—'}};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+function show(k){const d=M[k];$('#info').innerHTML=`<h2>${d.n}</h2><p class="t">${d.t}</p><dl><dt>Origin</dt><dd>${d.o}</dd><dt>Insertion</dt><dd>${d.i}</dd><dt>Nerve</dt><dd>${d.ne}</dd><dt>Action</dt><dd>${d.a}</dd></dl>`;
+$$('.chip').forEach(c=>c.setAttribute('aria-pressed',c.dataset.k===k));
+$$('.m').forEach(m=>m.style.opacity=m.dataset.k===k?1:(k==='fas'?.5:.3))}
+$$('.chip,.m').forEach(e=>{e.onclick=()=>show(e.dataset.k);e.onkeydown=ev=>{if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();show(e.dataset.k)}}});
+show('maj');
+function tab(n){$('#explore').hidden=n!==1;$('#quiz').hidden=n!==2;$('#t1').setAttribute('aria-selected',n===1);$('#t2').setAttribute('aria-selected',n===2);if(n===2&&!S)menu()}
+$('#t1').onclick=()=>tab(1);$('#t2').onclick=()=>tab(2);
+
+const Q1=[
+['The shape of pectoralis major is:',['Fan shaped','Triangular','Quadrangular','Strap-like'],0,'It is the largest muscle of the region and has a fan shape.'],
+['The clavicular head of pectoralis major arises from the:',['Medial half of the anterior clavicle','Lateral third of the clavicle','Manubrium only','Acromion'],0,'Clavicular head: medial half of the anterior aspect of the clavicle.'],
+['The sternocostal head of pectoralis major also arises from the:',['Upper 6 costal cartilages','Lower 6 ribs','Coracoid process','Spine of scapula'],0,'Sternum plus the upper 6 costal cartilages.'],
+['Pectoralis major is inserted into the:',['Lateral lip of the bicipital groove','Medial lip of the bicipital groove','Floor of the bicipital groove','Coracoid process'],0,'By a bilaminar tendon onto the lateral lip. (Floor = latissimus dorsi.)'],
+['Nerve supply of pectoralis major:',['Lateral and medial pectoral nerves','Medial pectoral nerve only','Long thoracic nerve','Thoracodorsal nerve'],0,'Both pectoral nerves supply it.'],
+['Which part of pectoralis major mainly produces arm flexion?',['Clavicular head','Sternocostal head','Both equally','Neither'],0,'Flexion is done by the clavicular head; the muscle also adducts and medially rotates the arm.'],
+['Pectoralis major with latissimus dorsi draws the trunk toward the upper limb in:',['Climbing and swimming','Walking','Deep inspiration','Shrugging'],0,'Seen in climbing and swimming.'],
+['Pectoralis minor arises from:',['3rd, 4th and 5th ribs','1st rib','2nd to 6th ribs','Upper 8 ribs'],0,'3rd–5th ribs near their costal cartilages. (Upper 8 ribs = serratus anterior.)'],
+['Pectoralis minor is inserted into the:',['Medial border and upper surface of the coracoid process','Lateral border of the scapula','Inferior angle of the scapula','Bicipital groove'],0,'Coracoid process of the scapula.'],
+['Pectoralis minor is supplied by the:',['Medial pectoral nerve','Lateral pectoral nerve','Nerve to subclavius','Suprascapular nerve'],0,'Medial pectoral nerve (C8, T1, from the medial cord).'],
+['Actions of pectoralis minor on the scapula:',['Protraction and depression','Elevation and retraction','Lateral rotation only','Retraction and adduction'],0,'It protracts and depresses the scapula.'],
+['The subclavius muscle arises from the:',['1st rib at its costochondral junction','Coracoid process','Clavicle','2nd rib'],0,'First rib at the costochondral junction, inserting into the subclavius groove.'],
+['Subclavius is inserted into the:',['Subclavian groove on the lower surface of the clavicle','Coracoid process','Acromion','Upper surface of the 1st rib'],0,'Subclavius groove on the inferior surface of the clavicle.'],
+['The nerve to subclavius arises from the:',['Upper trunk (C5, 6)','Lateral cord','Medial cord','Posterior cord'],0,'Upper trunk of the brachial plexus, C5, 6.'],
+['Main action of subclavius:',['Stabilizes the medial end of the clavicle','Depresses the scapula','Abducts the arm','Elevates the 1st rib only'],0,'It steadies the medial end of the clavicle during shoulder movement.'],
+['The clavipectoral fascia extends between:',['Subclavius and pectoralis minor','Pectoralis major and the skin','Serratus anterior and latissimus dorsi','Clavicle and acromion only'],0,'It lies deep to pectoralis major, between subclavius and pectoralis minor.'],
+['Below, the clavipectoral fascia forms the:',['Suspensory ligament of the axilla','Costocoracoid ligament','Coracoacromial ligament','Axillary sheath'],0,'The layers fuse and attach to the axillary fascia as the suspensory ligament.'],
+['Which does NOT pierce the clavipectoral fascia (per the book)?',['Medial pectoral nerve','Cephalic vein','Thoraco-acromial artery','Lateral pectoral nerve'],0,'Piercing structures listed: thoraco-acromial artery, cephalic vein, lateral pectoral nerve, lymph vessels.'],
+['The lateral pectoral nerve arises from the lateral cord with root value:',['C5, 6','C8, T1','C7, 8','C6, 7'],0,'Lateral pectoral C5, 6; medial pectoral C8, T1.'],
+['Serratus anterior is supplied by the:',['Long thoracic nerve (C5, 6, 7)','Thoracodorsal nerve','Medial pectoral nerve','Dorsal scapular nerve'],0,'Long thoracic nerve, C5, 6, 7.'],
+['Serratus anterior arises by how many digitations?',['8 from the upper 8 ribs','5 from the upper 5 ribs','6 from the upper 6 ribs','10 from the lower ribs'],0,'8 fleshy digitations from the upper 8 ribs.'],
+['Winged scapula after long thoracic nerve injury causes loss of:',['Arm abduction from 90° to 180°','Arm adduction','Elbow flexion','Shoulder extension'],0,'The patient cannot raise the arm above head level. Causes include blows to the posterior triangle and radical mastectomy.']
+];
+const Q2=[
+['The pectoral region is:',['The anterior aspect of the thorax (chest)','The lateral wall of the axilla','The posterior aspect of the thorax','The anterior aspect of the arm'],0,'It is the anterior aspect of the thorax. Its muscles relate to the upper limb, so they are thoraco-appendicular.'],
+['The main muscles of the pectoral region in the book are:',['Pectoralis major, pectoralis minor, subclavius (+ serratus anterior)','Pectoralis major, latissimus dorsi, trapezius','Deltoid, subscapularis, teres major','Pectoralis minor, rhomboids, levator scapulae'],0,'Mainly pectoralis major, pectoralis minor and subclavius, in addition to serratus anterior.'],
+['Pectoralis major is the largest muscle of the region and its shape is:',['Fan-shaped','Triangular','Quadrangular','Rounded'],0,'Pectoralis major is fan-shaped; pectoralis minor is the triangular one.'],
+['Pectoralis major arises by:',['Two heads: clavicular and sternocostal','One head from the sternum','Three heads: clavicular, sternal, costal','Two heads: clavicular and coracoid'],0,'Clavicular head and sternocostal head.'],
+['The clavicular head arises from the:',['Medial half of the anterior aspect of the clavicle','Lateral half of the anterior aspect of the clavicle','Medial half of the posterior aspect of the clavicle','Whole length of the clavicle'],0,'Medial half of the anterior aspect of the clavicle.'],
+['Which is NOT an origin of pectoralis major?',['Coracoid process of the scapula','Medial half of the clavicle','Anterior surface of the sternum','Upper 6 costal cartilages'],0,'The coracoid process is the insertion of pectoralis minor. Pectoralis major arises from the clavicle, sternum and upper 6 costal cartilages.'],
+['The sternocostal head also arises from:',['Upper 6 costal cartilages','Upper 4 costal cartilages','Costal cartilages 2 to 7','Lower 6 ribs'],0,'The upper 6 costal cartilages.'],
+['Pectoralis major is inserted by a bilaminar tendon onto the:',['Lateral lip of the bicipital groove','Medial lip of the bicipital groove','Floor of the bicipital groove','Greater tubercle'],0,'Lateral lip (the floor is for latissimus dorsi, the medial lip for teres major).'],
+['Nerve supply of pectoralis major:',['Lateral and medial pectoral nerves','Medial pectoral nerve only','Lateral pectoral nerve only','Nerve to subclavius'],0,'Both pectoral nerves.'],
+['Which part of pectoralis major flexes the arm?',['Clavicular head','Sternocostal head','Both heads equally','Neither head'],0,'Flexion is by the clavicular head.'],
+['Actions of pectoralis major on the arm:',['Flexion (clavicular head), adduction and medial rotation','Extension, adduction and lateral rotation','Abduction and medial rotation','Flexion, abduction and lateral rotation'],0,'Flexion (clavicular head), adduction and medial rotation.'],
+['With latissimus dorsi, pectoralis major:',['Draws the trunk toward the upper limb, as in climbing and swimming','Abducts the arm to 180°','Protracts the scapula','Elevates the clavicle'],0,'Climbing and swimming.'],
+['Pectoralis minor is:',['A triangular muscle deep to pectoralis major','A fan-shaped superficial muscle','A small rounded muscle below the clavicle','A flat muscle between scapula and chest wall'],0,'Triangular and deep to pectoralis major.'],
+['Pectoralis minor arises from:',['3rd, 4th and 5th ribs near their costal cartilages','1st rib at the costochondral junction','2nd to 6th ribs','Upper 8 ribs'],0,'3rd, 4th and 5th ribs.'],
+['Pectoralis minor is inserted into the:',['Medial border and upper surface of the coracoid process','Lateral border of the scapula','Inferior angle of the scapula','Bicipital groove'],0,'Coracoid process of the scapula.'],
+['Nerve supply of pectoralis minor:',['Medial pectoral nerve','Lateral pectoral nerve','Both pectoral nerves','Nerve to subclavius'],0,'Medial pectoral nerve only.'],
+['Action of pectoralis minor:',['Protraction and depression of the scapula','Elevation and retraction of the scapula','Adduction of the arm','Stabilizing the clavicle'],0,'Protraction and depression of the scapula.'],
+['Subclavius is:',['A small rounded muscle below the clavicle, in the plane of pectoralis minor','A triangular muscle deep to pectoralis major','A flat muscle on the chest wall','A fan-shaped muscle'],0,'Small, rounded, inferior to the clavicle.'],
+['Subclavius arises from the:',['1st rib at its costochondral junction','Coracoid process','2nd rib','Clavicle'],0,'First rib at the costochondral junction.'],
+['Subclavius is inserted into the:',['Subclavius groove on the lower surface of the clavicle','Coracoid process','Acromion','Upper surface of the 1st rib'],0,'Subclavius groove on the lower surface of the clavicle.'],
+['Nerve supply of subclavius:',['Nerve to subclavius (upper trunk, C5, 6)','Medial pectoral nerve','Lateral pectoral nerve','Long thoracic nerve'],0,'Nerve to subclavius, a branch of the upper trunk (C5, 6).'],
+['Action of subclavius:',['Stabilizes the medial end of the clavicle during shoulder movement','Depresses the scapula','Protracts the scapula','Abducts the arm'],0,'It steadies the medial end of the clavicle.'],
+['The lateral pectoral nerve comes from the lateral cord (root value):',['C5, 6','C8, T1','C7, 8','C6, 7'],0,'Lateral pectoral C5, 6. Medial pectoral comes from the medial cord (C8, T1).'],
+['The clavipectoral fascia is:',['A double-layered fibrous sheet between subclavius and pectoralis minor, deep to pectoralis major','A single layer over pectoralis major','A sheet between serratus anterior and the ribs','A layer superficial to the skin of the chest'],0,'Double-layered, between subclavius and pectoralis minor.'],
+['Above, the two layers enclose subclavius and attach to the:',['Lower surface of the clavicle','Coracoid process','First rib','Sternum'],0,'Lower surface of the clavicle.'],
+['Below, the layers enclose pectoralis minor, fuse and attach to the:',['Axillary fascia','Deltoid fascia','Pectoralis major tendon','Coracoid process only'],0,'They fuse and attach to the axillary fascia.'],
+['The fused lower part of the clavipectoral fascia forms the:',['Suspensory ligament of the axilla','Axillary sheath','Coracoacromial ligament','Costoclavicular ligament'],0,'Suspensory ligament of the axilla.'],
+['Structures piercing the clavipectoral fascia are:',['Thoraco-acromial artery, cephalic vein, lateral pectoral nerve, lymph vessels','Thoraco-acromial artery, cephalic vein, medial pectoral nerve, axillary vein','Axillary artery, cephalic vein, lateral pectoral nerve, lymph vessels','Thoraco-acromial artery, basilic vein, long thoracic nerve, lymph vessels'],0,'Thoraco-acromial artery, cephalic vein, lateral pectoral nerve and lymph vessels.'],
+['Which is NOT in the book’s list of structures piercing the clavipectoral fascia?',['Axillary artery','Thoraco-acromial artery','Cephalic vein','Lateral pectoral nerve'],0,'The axillary artery is not listed.'],
+['A surgeon divides only the clavicular head of pectoralis major. Which arm movement is mainly weakened?',['Flexion','Extension','Abduction','Lateral rotation'],0,'The clavicular head is the part that flexes the arm.',1],
+['A climber pulls his body up toward his fixed arms. Which pair of muscles mainly does this?',['Pectoralis major and latissimus dorsi','Pectoralis minor and subclavius','Deltoid and supraspinatus','Serratus anterior and trapezius'],0,'Pectoralis major with latissimus dorsi draws the trunk toward the limb.',1],
+['After an isolated lateral pectoral nerve injury, a patient can still protract and depress the scapula. Why?',['Pectoralis minor is supplied by the medial pectoral nerve','Pectoralis minor is supplied by the lateral pectoral nerve','Subclavius performs these movements','Pectoralis major performs these movements'],0,'Pectoralis minor, the protractor and depressor, is supplied by the medial pectoral nerve only.',1],
+['A deep wound at the deltopectoral area cuts the nerve that pierces the clavipectoral fascia. Which nerve?',['Lateral pectoral nerve','Medial pectoral nerve','Nerve to subclavius','Long thoracic nerve'],0,'The lateral pectoral nerve is the nerve that pierces the fascia.',1],
+['A vein runs in the deltopectoral groove, pierces the clavipectoral fascia and drains into the axillary vein. Which vein?',['Cephalic vein','Basilic vein','Subclavian vein','Brachial vein'],0,'Cephalic vein.',1],
+['An MRI shows a muscle arising from the 3rd to 5th ribs and inserting into the coracoid process. Injury of which nerve paralyzes it?',['Medial pectoral nerve','Lateral pectoral nerve','Long thoracic nerve','Nerve to subclavius'],0,'This is pectoralis minor, supplied by the medial pectoral nerve.',1],
+['An upper trunk lesion (C5, 6) affects the nerve to which pectoral-region muscle?',['Subclavius','Pectoralis minor','Pectoralis major','Serratus anterior'],0,'The nerve to subclavius arises from the upper trunk.',1],
+['A medial cord (C8, T1) injury affects a pectoral nerve. Which muscle loses its only nerve supply?',['Pectoralis minor','Pectoralis major','Subclavius','Both pectoralis major and subclavius'],0,'Pectoralis minor is supplied by the medial pectoral nerve alone; pectoralis major also gets the lateral pectoral nerve.',1],
+['Dissecting deep to pectoralis major, a surgeon finds a double-layered fibrous sheet. Which two muscles does it enclose?',['Subclavius and pectoralis minor','Pectoralis major and minor','Subclavius and serratus anterior','Pectoralis minor and latissimus dorsi'],0,'The clavipectoral fascia encloses subclavius above and pectoralis minor below.',1],
+['Cutting through the clavipectoral fascia to reach the axilla, which structures are divided?',['Thoraco-acromial artery, cephalic vein, lateral pectoral nerve, lymph vessels','Axillary artery and vein','Long thoracic nerve and thoracodorsal nerve','Medial pectoral nerve and basilic vein'],0,'Those four structures pierce the fascia.',1],
+['A surgeon cuts the fused lower layers where they attach to the axillary fascia. Which structure is damaged?',['Suspensory ligament of the axilla','Coracoacromial ligament','Axillary sheath','Bicipital aponeurosis'],0,'There the layers form the suspensory ligament of the axilla.',1]
+];
+
+let Q=Q1,cur=1,S,order,i,sc,wrong;
+const sh=a=>{a=[...a];for(let j=a.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[a[j],a[k]]=[a[k],a[j]]}return a};
+function menu(){S=0;$('#qbox').innerHTML=`<h2 style="margin-bottom:6px">Choose a quiz</h2><p class="hint" style="margin:0 0 14px">Both are built from the module book.</p><button class="next" style="margin-top:0" onclick="start(2)">Focused: Pectoral region to clavipectoral fascia (${Q2.length} Qs, with cases)</button><button class="next ghost" onclick="start(1)">Quick mixed quiz (${Q1.length} Qs)</button>`}
+function start(k){cur=k||cur;Q=cur===2?Q2:Q1;S=1;order=sh(Q.map((_,x)=>x));i=0;sc=0;wrong=[];ask()}
+function ask(){const q=Q[order[i]],ops=sh(q[1].map((t,x)=>({t,c:x===q[2]})));
+$('#qbox').innerHTML=`<div class="meta"><span>Question ${i+1} of ${Q.length}</span><span>Score ${sc}</span></div><div class="bar"><i style="width:${i/Q.length*100}%"></i></div><p class="q">${q[4]?'<span class="case">Case</span> ':''}${q[0]}</p><div class="opts">${ops.map((o,x)=>`<button class="opt" data-c="${o.c?1:0}"><b>${'ABCD'[x]}</b><span>${o.t}</span></button>`).join('')}</div><div id="fb"></div>`;
+$$('.opt').forEach(b=>b.onclick=()=>{$$('.opt').forEach(o=>{o.disabled=true;if(o.dataset.c==='1')o.classList.add('good')});
+const ok=b.dataset.c==='1';if(ok)sc++;else{b.classList.add('bad');wrong.push(order[i])}
+$('#fb').innerHTML=`<div class="exp"><strong>${ok?'Correct.':'Not quite.'}</strong> ${q[3]}</div><button class="next" id="nx">${i+1<Q.length?'Next question':'See results'}</button>`;
+$('#nx').focus();$('#nx').onclick=()=>{i++;i<Q.length?ask():end()}})}
+function end(){const p=Math.round(sc/Q.length*100);
+$('#qbox').innerHTML=`<div class="bar"><i style="width:100%"></i></div><div class="score">${sc}<span style="font-size:28px;color:var(--mute)">/${Q.length}</span></div><h2 style="margin:8px 0">${p>=90?'Excellent work.':p>=70?'Solid. A little review will lock it in.':'Worth another pass through the Explore tab.'}</h2>
+${wrong.length?`<p style="color:var(--mute);margin:12px 0 0">Review the ones you missed:</p><ul class="rev">${wrong.map(x=>`<li>${Q[x][0]}<br><small>Answer: ${Q[x][1][Q[x][2]]}</small></li>`).join('')}</ul>`:'<p>No mistakes. Perfect run.</p>'}
+<button class="next" id="again">Try again (shuffled)</button><button class="next ghost" id="mn">Choose another quiz</button><button class="next ghost" id="ex">Back to Explore</button>`;
+$('#again').onclick=()=>start(cur);$('#mn').onclick=menu;$('#ex').onclick=()=>tab(1)}
+</script></body></html>
